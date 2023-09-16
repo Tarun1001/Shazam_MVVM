@@ -1,0 +1,168 @@
+{
+  "tracks": {
+    "hits": [
+      {
+        "track": {
+          "layout": "5",
+          "type": "MUSIC",
+          "key": "20066955",
+          "title": "Kiss The Rain",
+          "subtitle": "Billie Myers",
+          "share": {
+            "subject": "Kiss The Rain - Billie Myers",
+            "text": "I used Shazam to discover Kiss The Rain by Billie Myers.",
+            "href": "https://www.shazam.com/track/20066955/kiss-the-rain",
+            "image": "https://is3-ssl.mzstatic.com/image/thumb/Music114/v4/02/74/5a/02745ac2-cbfb-a90a-b970-7449be5d4c42/06UMGIM10734.rgb.jpg/400x400cc.jpg",
+            "twitter": "I used @Shazam to discover Kiss The Rain by Billie Myers.",
+            "html": "https://www.shazam.com/snippets/email-share/20066955?lang=en-US&country=US",
+            "avatar": "https://is5-ssl.mzstatic.com/image/thumb/Features124/v4/4e/0d/1f/4e0d1ff5-9f2e-0170-0ec9-3dbe25f3a471/pr_source.png/800x800cc.jpg",
+            "snapchat": "https://www.shazam.com/partner/sc/track/20066955"
+          },
+          "images": {
+            "background": "https://is5-ssl.mzstatic.com/image/thumb/Features124/v4/4e/0d/1f/4e0d1ff5-9f2e-0170-0ec9-3dbe25f3a471/pr_source.png/800x800cc.jpg",
+            "coverart": "https://is3-ssl.mzstatic.com/image/thumb/Music114/v4/02/74/5a/02745ac2-cbfb-a90a-b970-7449be5d4c42/06UMGIM10734.rgb.jpg/400x400cc.jpg",
+            "coverarthq": "https://is3-ssl.mzstatic.com/image/thumb/Music114/v4/02/74/5a/02745ac2-cbfb-a90a-b970-7449be5d4c42/06UMGIM10734.rgb.jpg/400x400cc.jpg",
+            "joecolor": "b:fffffdp:0b0a08s:313029t:3c3b39q:5a5954"
+          },
+          "hub": {
+            "type": "APPLEMUSIC",
+            "image": "https://images.shazam.com/static/icons/hub/ios/v5/applemusic_{scalefactor}.png",
+            "actions": [
+              {
+                "name": "apple",
+                "type": "applemusicplay",
+                "id": "1444027955"
+              },
+              {
+                "name": "apple",
+                "type": "uri",
+                "uri": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/a7/44/d7/a744d7c6-d06c-17a2-ad19-cd01b46a8cbd/mzaf_8512763237108905867.plus.aac.ep.m4a"
+              }
+            ],
+            "options": [
+              {
+                "caption": "OPEN",
+                "actions": [
+                  {
+                    "name": "hub:applemusic:deeplink",
+                    "type": "applemusicopen",
+                    "uri": "https://music.apple.com/us/album/kiss-the-rain/1444027943?i=1444027955&mttnagencyid=s2n&mttnsiteid=125115&mttn3pid=Apple-Shazam&mttnsub1=Shazam_ios&mttnsub2=5348615A-616D-3235-3830-44754D6D5973&itscg=30201&app=music&itsct=Shazam_ios"
+                  },
+                  {
+                    "name": "hub:applemusic:deeplink",
+                    "type": "uri",
+                    "uri": "https://music.apple.com/us/album/kiss-the-rain/1444027943?i=1444027955&mttnagencyid=s2n&mttnsiteid=125115&mttn3pid=Apple-Shazam&mttnsub1=Shazam_ios&mttnsub2=5348615A-616D-3235-3830-44754D6D5973&itscg=30201&app=music&itsct=Shazam_ios"
+                  }
+                ],
+                "beacondata": {
+                  "type": "open",
+                  "providername": "applemusic"
+                },
+                "image": "https://images.shazam.com/static/icons/hub/ios/v5/overflow-open-option_{scalefactor}.png",
+                "type": "open",
+                "listcaption": "Open in Apple Music",
+                "overflowimage": "https://images.shazam.com/static/icons/hub/ios/v5/applemusic-overflow_{scalefactor}.png",
+                "colouroverflowimage": false,
+                "providername": "applemusic"
+              },
+              {
+                "caption": "BUY",
+                "actions": [
+                  {
+                    "type": "uri",
+                    "uri": "https://itunes.apple.com/us/album/kiss-the-rain/1444027943?i=1444027955&mttnagencyid=s2n&mttnsiteid=125115&mttn3pid=Apple-Shazam&mttnsub1=Shazam_ios&mttnsub2=5348615A-616D-3235-3830-44754D6D5973&itscg=30201&app=itunes&itsct=Shazam_ios"
+                  }
+                ],
+                "beacondata": {
+                  "type": "buy",
+                  "providername": "itunes"
+                },
+                "image": "https://images.shazam.com/static/icons/hub/ios/v5/itunes-overflow-buy_{scalefactor}.png",
+                "type": "buy",
+                "listcaption": "Buy on iTunes",
+                "overflowimage": "https://images.shazam.com/static/icons/hub/ios/v5/itunes-overflow-buy_{scalefactor}.png",
+                "colouroverflowimage": false,
+                "providername": "itunes"
+              }
+            ],
+            "providers": [
+              {
+                "caption": "Open in Spotify",
+                "images": {
+                  "overflow": "https://images.shazam.com/static/icons/hub/ios/v5/spotify-overflow_{scalefactor}.png",
+                  "default": "https://images.shazam.com/static/icons/hub/ios/v5/spotify_{scalefactor}.png"
+                },
+                "actions": [
+                  {
+                    "name": "hub:spotify:searchdeeplink",
+                    "type": "uri",
+                    "uri": "spotify:search:Kiss%20The%20Rain%20Billie%20Myers"
+                  }
+                ],
+                "type": "SPOTIFY"
+              },
+              {
+                "caption": "Open in Deezer",
+                "images": {
+                  "overflow": "https://images.shazam.com/static/icons/hub/ios/v5/deezer-overflow_{scalefactor}.png",
+                  "default": "https://images.shazam.com/static/icons/hub/ios/v5/deezer_{scalefactor}.png"
+                },
+                "actions": [
+                  {
+                    "name": "hub:deezer:searchdeeplink",
+                    "type": "uri",
+                    "uri": "deezer-query://www.deezer.com/play?query=%7Btrack%3A%27Kiss+The+Rain%27%20artist%3A%27Billie+Myers%27%7D"
+                  }
+                ],
+                "type": "DEEZER"
+              }
+            ],
+            "explicit": false,
+            "displayname": "APPLE MUSIC"
+          },
+          "artists": [
+            {
+              "id": "33128",
+              "adamid": "99951"
+            }
+          ],
+          "url": "https://www.shazam.com/track/20066955/kiss-the-rain"
+        },
+        "snippet": "Kiss the rain (Kiss the rain)"
+      }
+    ]
+  },
+  "artists": {
+    "hits": [
+      {
+        "artist": {
+          "avatar": "https://is5-ssl.mzstatic.com/image/thumb/Features124/v4/4e/0d/1f/4e0d1ff5-9f2e-0170-0ec9-3dbe25f3a471/pr_source.png/800x800cc.jpg",
+          "id": "33128",
+          "name": "Billie Myers",
+          "verified": false,
+          "weburl": "https://www.shazam.com/artist/33128/billie-myers",
+          "adamid": "99951"
+        }
+      },
+      {
+        "artist": {
+          "avatar": "https://is4-ssl.mzstatic.com/image/thumb/Features115/v4/3f/84/4e/3f844e97-8c23-b64d-87f1-d536e99f80e9/mzl.rsxdpqqq.jpg/800x800cc.jpg",
+          "id": "40008598",
+          "name": "Yiruma",
+          "verified": false,
+          "weburl": "https://www.shazam.com/artist/40008598/yiruma",
+          "adamid": "73406786"
+        }
+      },
+      {
+        "artist": {
+          "id": "45877566",
+          "name": "Kiss The Rain",
+          "verified": false,
+          "weburl": "https://www.shazam.com/artist/45877566/kiss-the-rain",
+          "adamid": "881889878"
+        }
+      }
+    ]
+  }
+}
