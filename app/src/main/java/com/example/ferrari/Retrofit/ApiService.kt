@@ -2,6 +2,7 @@ package com.example.ferrari.Retrofit
 
 import com.example.ferrari.Model.data.Search.SongSearch
 import com.example.ferrari.Utils.AppConstants
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -16,7 +17,7 @@ interface ApiService {
     suspend fun search(@Query("term") term: String,
                        @Query("locale") locale: String,
                        @Query("offset") offset: Int,
-                       @Query("limit") limit: Int):    SongSearch
+                       @Query("limit") limit: Int):    Response<SongSearch>
 
     /*@Headers(
             "content-type: application/x-www-form-urlencoded",

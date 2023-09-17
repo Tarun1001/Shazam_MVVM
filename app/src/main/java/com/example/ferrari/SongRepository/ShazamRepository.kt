@@ -4,25 +4,57 @@ import android.util.Log
 import com.example.ferrari.Model.data.Search.SongSearch
 import com.example.ferrari.Utils.NetworkResponse
 import com.example.ferrari.Retrofit.ApiService
+import java.io.IOException
+import java.net.UnknownHostException
 
 class ShazamRepository(private val apiService: ApiService) {
 
-    suspend fun SearchTrack(term: String,
-                            locale: String,
-                            offset: Int,
-                            limit: Int): NetworkResponse<SongSearch>
-    {
+    suspend fun SearchTrack(
+        term: String,
+        locale: String,
+        offset: Int,
+        limit: Int
+    ): NetworkResponse<SongSearch> {
         return try {
-            val responseData= apiService.search(term, locale, offset, limit)
-            Log.d("Flow",responseData.toString())
-
-            return NetworkResponse.Success(responseData)
-
+            val response = apiService.search(term, locale, offset, limit)
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                if (responseBody != null) {
+                    Log.d("Flow", responseBody.toString())
+                    NetworkResponse.Success(responseBody)
+                } else {
+                    NetworkResponse.Failure(
+                        response.code(),
+                        "Response body is empty",
+                        null
+                    )
+                }
+            } else {
+                NetworkResponse.Failure(
+                    response.code(),
+                    response.message(),
+                    null
+                )
+            }
+        } catch (e: IOException) {
+            NetworkResponse.Failure(
+                null,
+                "An error occurred while communicating with the server. Please check your internet connection.",
+                e
+            )
+        } catch (e: UnknownHostException) {
+            NetworkResponse.Failure(
+                null,
+                "Unable to connect to the server. Please check your internet connection.",
+                e
+            )
         } catch (e: Exception) {
-            NetworkResponse.Failure(e)
+            NetworkResponse.Failure(
+                null,
+                "An unexpected error occurred.",
+                e
+            )
         }
-
-
     }
 }
 /**

@@ -3,6 +3,7 @@ package com.example.ferrari.UI
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -73,9 +74,15 @@ class MainActivity : AppCompatActivity() {
                 is NetworkResponse.Failure -> {
                     binding.animationView.visibility=View.GONE
                     binding.animationView.cancelAnimation()
-                    val error = it.exception
-                    // Handle the error
-                    Toast.makeText(this,"exception $error",Toast.LENGTH_SHORT).show()
+
+                    val errorCode = it.errorCode
+                    val errorMessage = it.errorMessage
+                    val exception = it.exception
+                    //we can set it somethinglike this
+                    //if the user is in debug mode we can check it and display a different toast message with http code
+
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    exception?: Log.e("exception",errorCode.toString()+" "+exception)
                 }
 
             }

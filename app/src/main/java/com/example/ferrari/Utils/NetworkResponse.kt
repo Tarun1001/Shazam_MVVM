@@ -48,7 +48,9 @@ sealed class NetworkResponse<out T> {
 
     data class Success<out T>(val data:T?):  NetworkResponse<T>()
 
-    data class Failure(val exception: Exception): NetworkResponse<Nothing>()
+    data class Failure( val errorCode: Int?,
+                        val errorMessage: String?,
+                        val exception: Exception?): NetworkResponse<Nothing>()
 
 }
 
