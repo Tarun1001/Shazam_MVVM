@@ -1,6 +1,8 @@
 package com.example.ferrari
 
+import android.util.Log
 import com.example.ferrari.Model.data.Search.SongSearch
+import com.google.gson.JsonObject
 
 class ShazamRepository(private val apiService: ApiService ) {
 
@@ -11,6 +13,8 @@ class ShazamRepository(private val apiService: ApiService ) {
     {
         return try {
             val responseData= apiService.search(term, locale, offset, limit)
+            Log.d("Flow",responseData.toString())
+
             return NetworkResponse.Success(responseData)
 
         } catch (e: Exception) {

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+  <!-- Custom view for background animation -->
+  <com.example.ferrari.Utils.animation.CenterFillBackgroundView
+      android:id="@+id/backgroundView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_centerInParent="true" />
+
+  <!-- Your UI elements here -->
+
   <!--  <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="wrap_content"

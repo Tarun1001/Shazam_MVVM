@@ -1,6 +1,7 @@
 package com.example.ferrari
 
 import android.content.Context
+import android.graphics.drawable.AnimationDrawable
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,9 +14,8 @@ import com.example.ferrari.databinding.ActivityMainBinding
 import java.net.URLEncoder
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var viewModel: HomeViewModel
     private lateinit var binding: ActivityMainBinding
-    //private lateinit var animationView: LottieAnimationView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,21 +26,29 @@ class MainActivity : AppCompatActivity() {
         val apiService= MyRetrofitBuilder.apiService
         val shazamRepository=ShazamRepository(apiService)
 
-        //https://shazam.p.rapidapi.com/search?term=shape%20of%20you&locale=en-US&offset=0&limit=5
-
+        //animation
+        val backGroundView =binding.backgroundView
+        //
         val viewModel = ViewModelProvider(this, SearchViewModelFactory(shazamRepository)).get(HomeViewModel::class.java)
 
+        //
+        //
+        //
         binding.button.setOnClickListener(View.OnClickListener {
             hideKeyboard()
             binding.editTextText.clearFocus()
 
             if(binding.editTextText.text.toString() ==""){
-                Toast.makeText(this,"Please enter a song",Toast.LENGTH_SHORT)
+                Toast.makeText(this,"Please enter a song",Toast.LENGTH_SHORT).show()
+
             }
             else{
+                backGroundView.startAnimation()
+
                 val input=binding.editTextText.text.toString()
                 val encodedTerm = URLEncoder.encode(input, "UTF-8")
                 viewModel.searchForTheSong(encodedTerm,"en-US",0,5)
+
             }
         })
         viewModel.songsresults.observe(this) { it ->
@@ -70,6 +78,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        //
+        //
+        //
+
+
 
 
     }
