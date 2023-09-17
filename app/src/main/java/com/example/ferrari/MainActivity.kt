@@ -1,16 +1,21 @@
 package com.example.ferrari
 
+import android.content.Context
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.lottie.LottieAnimationView
 import com.example.ferrari.databinding.ActivityMainBinding
 import java.net.URLEncoder
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: ActivityMainBinding
+    //private lateinit var animationView: LottieAnimationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, SearchViewModelFactory(shazamRepository)).get(HomeViewModel::class.java)
 
         binding.button.setOnClickListener(View.OnClickListener {
+            hideKeyboard()
+            binding.editTextText.clearFocus()
+
             if(binding.editTextText.text.toString() ==""){
                 Toast.makeText(this,"Please enter a song",Toast.LENGTH_SHORT)
             }
@@ -38,18 +46,25 @@ class MainActivity : AppCompatActivity() {
         viewModel.songsresults.observe(this) { it ->
             when (it) {
                 is NetworkResponse.Loading->{
-                    binding.textView.text="Loading..."
+                    binding.animationView.visibility=View.VISIBLE
+                    binding.animationView.playAnimation()
+                    //binding.textView.text="Loading..."
                 }
                 is NetworkResponse.Success->{
+                    binding.animationView.visibility=View.GONE
+                    binding.animationView.cancelAnimation()
                     val songs= it.data
                     if (songs != null) {
+                        binding.textView.visibility=View.VISIBLE
                         binding.textView.text= songs.tracks.hits[0].track.share.subject
                     }
                 }
                 is NetworkResponse.Failure -> {
+                    binding.animationView.visibility=View.GONE
+                    binding.animationView.cancelAnimation()
                     val error = it.exception
                     // Handle the error
-                    Toast.makeText(this,"exception $error",Toast.LENGTH_SHORT)
+                    Toast.makeText(this,"exception $error",Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -57,6 +72,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }
 
