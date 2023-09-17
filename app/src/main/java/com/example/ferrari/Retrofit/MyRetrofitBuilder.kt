@@ -1,4 +1,4 @@
-package com.example.ferrari
+package com.example.ferrari.Retrofit
 
 import com.example.ferrari.Utils.AppConstants.BASE_URL
 import okhttp3.OkHttpClient

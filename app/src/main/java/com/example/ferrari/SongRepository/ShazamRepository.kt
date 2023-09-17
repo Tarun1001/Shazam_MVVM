@@ -1,10 +1,11 @@
-package com.example.ferrari
+package com.example.ferrari.SongRepository
 
 import android.util.Log
 import com.example.ferrari.Model.data.Search.SongSearch
-import com.google.gson.JsonObject
+import com.example.ferrari.Utils.NetworkResponse
+import com.example.ferrari.Retrofit.ApiService
 
-class ShazamRepository(private val apiService: ApiService ) {
+class ShazamRepository(private val apiService: ApiService) {
 
     suspend fun SearchTrack(term: String,
                             locale: String,

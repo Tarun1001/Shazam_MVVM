@@ -1,4 +1,4 @@
-package com.example.ferrari
+package com.example.ferrari.Utils
 
 /**
  * Usually, we will get Loading, Success, and Failure type from API response.
@@ -44,7 +44,7 @@ package com.example.ferrari
 
 sealed class NetworkResponse<out T> {
 
-    object Loading:NetworkResponse<Nothing>()
+    object Loading: NetworkResponse<Nothing>()
 
     data class Success<out T>(val data:T?):  NetworkResponse<T>()
 

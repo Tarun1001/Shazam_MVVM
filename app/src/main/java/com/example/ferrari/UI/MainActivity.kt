@@ -1,15 +1,17 @@
-package com.example.ferrari
+package com.example.ferrari.UI
 
 import android.content.Context
-import android.graphics.drawable.AnimationDrawable
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.airbnb.lottie.LottieAnimationView
+import com.example.ferrari.HomeViewmodel.HomeViewModel
+import com.example.ferrari.HomeViewmodel.SearchViewModelFactory
+import com.example.ferrari.Retrofit.MyRetrofitBuilder
+import com.example.ferrari.Utils.NetworkResponse
+import com.example.ferrari.SongRepository.ShazamRepository
 import com.example.ferrari.databinding.ActivityMainBinding
 import java.net.URLEncoder
 
@@ -24,12 +26,13 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         val apiService= MyRetrofitBuilder.apiService
-        val shazamRepository=ShazamRepository(apiService)
+        val shazamRepository= ShazamRepository(apiService)
 
         //animation
         val backGroundView =binding.backgroundView
         //
-        val viewModel = ViewModelProvider(this, SearchViewModelFactory(shazamRepository)).get(HomeViewModel::class.java)
+        val viewModel = ViewModelProvider(this, SearchViewModelFactory(shazamRepository)).get(
+            HomeViewModel::class.java)
 
         //
         //
@@ -53,12 +56,12 @@ class MainActivity : AppCompatActivity() {
         })
         viewModel.songsresults.observe(this) { it ->
             when (it) {
-                is NetworkResponse.Loading->{
+                is NetworkResponse.Loading ->{
                     binding.animationView.visibility=View.VISIBLE
                     binding.animationView.playAnimation()
                     //binding.textView.text="Loading..."
                 }
-                is NetworkResponse.Success->{
+                is NetworkResponse.Success ->{
                     binding.animationView.visibility=View.GONE
                     binding.animationView.cancelAnimation()
                     val songs= it.data
