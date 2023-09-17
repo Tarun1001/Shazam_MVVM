@@ -20,7 +20,7 @@ class ShazamRepository(private val apiService: ApiService) {
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 if (responseBody != null) {
-                    Log.d("Flow", responseBody.toString())
+                   // Log.d("Flow", responseBody.toString())
                     NetworkResponse.Success(responseBody)
                 } else {
                     NetworkResponse.Failure(
