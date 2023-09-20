@@ -10,14 +10,19 @@ import androidx.core.content.ContextCompat
 import com.example.ferrari.R
 
 class CenterFillBackgroundView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
-    private val backgroundColor = ContextCompat.getColor(context, R.color.start_color)
-    private val endColor = ContextCompat.getColor(context, R.color.end_color)
+    private var startColor = ContextCompat.getColor(context, R.color.start_color)
+    private var endColor = ContextCompat.getColor(context, R.color.end_color)
     private val animationDuration = 1000L // Duration in milliseconds
     private val paint = Paint()
     private var animationProgress = 0f
 
     init {
-        paint.color = backgroundColor
+        paint.color = startColor
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, endColor: Int) : this(context, attrs) {
+        this.endColor = endColor
+        paint.color = startColor
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -36,7 +41,7 @@ class CenterFillBackgroundView(context: Context, attrs: AttributeSet?) : View(co
                 val elapsedTime = currentTime - startTime
                 animationProgress = (elapsedTime.toFloat() / animationDuration).coerceAtMost(1f)
 
-                paint.color = interpolateColor(backgroundColor, endColor, animationProgress)
+                paint.color = interpolateColor(startColor, endColor, animationProgress)
                 invalidate()
 
                 if (animationProgress < 1f) {
@@ -44,6 +49,12 @@ class CenterFillBackgroundView(context: Context, attrs: AttributeSet?) : View(co
                 }
             }
         })
+    }
+
+    fun setEndColor(endColorx: Int) {
+        endColor = endColorx
+        paint.color = endColor // Update the current color immediately
+        invalidate()
     }
 
     private fun interpolateColor(startColor: Int, endColor: Int, fraction: Float): Int {

@@ -1,6 +1,7 @@
 package com.example.ferrari.UI
 
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,17 +9,28 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ferrari.HomeViewmodel.HomeViewModel
 import com.example.ferrari.HomeViewmodel.SearchViewModelFactory
+import com.example.ferrari.Model.data.Search.Tracks
+import com.example.ferrari.R
 import com.example.ferrari.Retrofit.MyRetrofitBuilder
 import com.example.ferrari.Utils.NetworkResponse
 import com.example.ferrari.SongRepository.ShazamRepository
+import com.example.ferrari.Utils.CommonMethods
+import com.example.ferrari.Utils.TrackT
+import com.example.ferrari.Utils.animation.CenterFillBackgroundView
 import com.example.ferrari.databinding.ActivityMainBinding
 import java.net.URLEncoder
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    val tracks: MutableList<TrackT> = mutableListOf()
+    private lateinit var  backGroundView: CenterFillBackgroundView
+    private lateinit var backgroundcolor:String
+    private  var hexcolor :Int = 0
+    private lateinit var  myView: CenterFillBackgroundView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,18 +38,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         val apiService= MyRetrofitBuilder.apiService
         val shazamRepository= ShazamRepository(apiService)
+        myView = CenterFillBackgroundView(this, null)
+        backGroundView =binding.backgroundView
 
-        //animation
-        val backGroundView =binding.backgroundView
-        //
         val viewModel = ViewModelProvider(this, SearchViewModelFactory(shazamRepository)).get(
             HomeViewModel::class.java)
 
-        //
-        //
-        //
         binding.button.setOnClickListener(View.OnClickListener {
             hideKeyboard()
             binding.editTextText.clearFocus()
@@ -47,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             else{
-                backGroundView.startAnimation()
+                //backGroundView.startAnimation()
 
                 val input=binding.editTextText.text.toString()
                 val encodedTerm = URLEncoder.encode(input, "UTF-8")
@@ -66,9 +75,18 @@ class MainActivity : AppCompatActivity() {
                     binding.animationView.visibility=View.GONE
                     binding.animationView.cancelAnimation()
                     val songs= it.data
+
                     if (songs != null) {
                         binding.textView.visibility=View.VISIBLE
-                        binding.textView.text= songs.tracks.hits[0].track.share.subject
+                        val tracks= songs.tracks
+                        showcardview(tracks)
+
+                    }
+
+                    populatetracks()
+                    binding.cardRecycleview.apply {
+                        layoutManager=LinearLayoutManager(applicationContext,LinearLayoutManager.HORIZONTAL,false)
+                        adapter= CardAdapter(tracks)
                     }
                 }
                 is NetworkResponse.Failure -> {
@@ -78,68 +96,44 @@ class MainActivity : AppCompatActivity() {
                     val errorCode = it.errorCode
                     val errorMessage = it.errorMessage
                     val exception = it.exception
-                    //we can set it somethinglike this
+
+                    //we can set it something like this
                     //if the user is in debug mode we can check it and display a different toast message with http code
 
                     Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                     exception?: Log.e("exception",errorCode.toString()+" "+exception)
                 }
 
+                else -> {}
             }
 
         }
-        //
-        //
-        //
 
+    }
 
+    private fun showcardview(tracks: Tracks) {
+        binding.textView.text= tracks.hits[0].track.share.subject
+        backgroundcolor=tracks.hits[0].track.images.joecolor
 
+        var convert= CommonMethods.customColorToHex(backgroundcolor)
+        hexcolor=Color.parseColor(convert)
+        myView.setEndColor(hexcolor)
+        backGroundView.startAnimation()
 
+    }
+
+    fun populatetracks(){
+        val track1= TrackT(layout = "5",
+            type = "MUSIC",
+            key = "20066955",
+            title = "Kiss The Rain",
+            subtitle = "Billie Myers",)
+        tracks.add(track1)
+        tracks.add(track1)
+        tracks.add(track1)
     }
     private fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }
-
-/*{
-  "location": {
-    "name": "Boston",
-    "region": "Lincolnshire",
-    "country": "United Kingdom",
-    "lat": 53.1,
-    "lon": -0.13,
-    "tz_id": "Europe/London",
-    "localtime_epoch": 1694855654,
-    "localtime": "2023-09-16 10:14"
-  },
-  "current": {
-    "last_updated_epoch": 1694854800,
-    "last_updated": "2023-09-16 10:00",
-    "temp_c": 16,
-    "temp_f": 60.8,
-    "is_day": 1,
-    "condition": {
-      "text": "Sunny",
-      "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
-      "code": 1000
-    },
-    "wind_mph": 4.3,
-    "wind_kph": 6.8,
-    "wind_degree": 340,
-    "wind_dir": "NNW",
-    "pressure_mb": 1015,
-    "pressure_in": 29.97,
-    "precip_mm": 0,
-    "precip_in": 0,
-    "humidity": 94,
-    "cloud": 0,
-    "feelslike_c": 16,
-    "feelslike_f": 60.8,
-    "vis_km": 10,
-    "vis_miles": 6,
-    "uv": 5,
-    "gust_mph": 11.6,
-    "gust_kph": 18.7
-  }
-}*/
